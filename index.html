@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Nova Mobile</title><meta name="theme-color" content="#0E1116">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Mobile Garden</title><meta name="theme-color" content="#0E1116">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>document.documentElement.className='js'</script>
@@ -86,7 +86,7 @@ table{width:100%;border-collapse:collapse;font-size:.92rem}th{text-align:left;co
 (function(){
 'use strict';
 /* ====== CONNECTION: put your Supabase project URL and anon key here. Leave as is to preview with sample data. ====== */
-var CFG={url:'YOUR-SUPABASE-PROJECT-URL',key:'YOUR-SUPABASE-ANON-KEY'};
+var CFG={url:'https://xadvcssojjlrlsrkhcgb.supabase.co/rest/v1/',key:'sb_publishable_xI2uxsTRyU_JCFOM5I7vWw_NwWgpcnj'};
 /* ====== Shop details (editable by asking Claude for now) ====== */
 var S={name:'Nova Mobile',phone:'+880 1700 000000',wa:'8801700000000',email:'hello@example.com',addr:'Shop 12, Market Road, Dhaka',hours:'Sat to Thu, 10:00 am to 9:00 pm',cur:'\u09F3',brands:'Apple,Samsung,Xiaomi,Oppo,Vivo,Realme,OnePlus,Infinix,Tecno,Walton'};
 var $=function(i){return document.getElementById(i);},LIVE=/^https:\/\//.test(CFG.url)&&CFG.key.length>40&&!!window.supabase;
