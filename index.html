@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Mobile Garden</title><meta name="theme-color" content="#0E1116">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Nova Mobile</title><meta name="theme-color" content="#0E1116">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.79.0/dist/umd/supabase.min.js"></script>
 <script>document.documentElement.className='js'</script>
 <style>
 :root{--ink:#0E1116;--ink2:#171C26;--accent:#FF7A1F;--accent-d:color-mix(in srgb,var(--accent) 80%,#000);--bg:#F5F6F9;--line:#E2E5EC;--muted:#5C6575;--head:'Sora','Segoe UI',Arial,sans-serif;--body:'Inter','Segoe UI',Arial,sans-serif;padding-top:env(safe-area-inset-top,0)}
@@ -86,11 +86,12 @@ table{width:100%;border-collapse:collapse;font-size:.92rem}th{text-align:left;co
 (function(){
 'use strict';
 /* ====== CONNECTION: put your Supabase project URL and anon key here. Leave as is to preview with sample data. ====== */
-var CFG={url:'https://xadvcssojjlrlsrkhcgb.supabase.co/rest/v1/',key:'sb_publishable_xI2uxsTRyU_JCFOM5I7vWw_NwWgpcnj'};
+var CFG={url:'https://xadvcssojjlrlsrkhcgb.supabase.co',key:'sb_publishable_xI2uxsTRyU_JCFOM5I7vWw_NwWgpcnj'};
 /* ====== Shop details (editable by asking Claude for now) ====== */
 var S={name:'Nova Mobile',phone:'+880 1700 000000',wa:'8801700000000',email:'hello@example.com',addr:'Shop 12, Market Road, Dhaka',hours:'Sat to Thu, 10:00 am to 9:00 pm',cur:'\u09F3',brands:'Apple,Samsung,Xiaomi,Oppo,Vivo,Realme,OnePlus,Infinix,Tecno,Walton'};
 var $=function(i){return document.getElementById(i);},LIVE=/^https:\/\//.test(CFG.url)&&CFG.key.length>40&&!!window.supabase;
-var sb=LIVE?window.supabase.createClient(CFG.url,CFG.key):null,P=[],RS=[];
+function fx(u,o){o=o||{};if(/^sb_/.test(CFG.key)){var h=new Headers(o.headers||{});if(h.get('Authorization')==='Bearer '+CFG.key)h.delete('Authorization');o=Object.assign({},o,{headers:h});}return fetch(u,o);}
+var sb=LIVE?window.supabase.createClient(CFG.url,CFG.key,{global:{fetch:fx}}):null,P=[],RS=[];
 var DP=[['Galaxy S24','Samsung',98000,'New','256 GB','Black',3,1],['iPhone 13','Apple',72000,'Refurbished','128 GB','Blue',2,1],['Redmi Note 13','Xiaomi',27000,'New','128 GB','Midnight',5,1],['Galaxy A54','Samsung',41000,'Used','128 GB','White',1,0],['Realme C55','Realme',19500,'New','64 GB','Sunshower',0,0],['iPhone 11','Apple',38000,'Used','64 GB','Black',2,1]].map(function(a,i){return {id:'d'+i,name:a[0],brand:a[1],price:a[2],condition:a[3],storage:a[4],color:a[5],stock:a[6],featured:!!a[7],description:'Sample listing. Add real phones from the owner admin page.',images:[],created_at:''};});
 var DR=[['Screen replacement','Cracked or unresponsive screens, fitted and tested.',3500,'Same day'],['Battery replacement','New battery for phones that drain fast.',1500,'About 1 hour'],['Charging port repair','Loose or dead charging port fixed.',1000,'About 1 hour'],['Water damage check','Inspection and cleaning after water exposure.',800,'1 to 2 days']].map(function(a,i){return {id:'r'+i,name:a[0],description:a[1],price_from:a[2],time:a[3]};});
 function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
