@@ -144,7 +144,7 @@ function wire(el,ms){var sl=el.querySelectorAll('.sl'),dots=el.querySelectorAll(
   el.addEventListener('mouseenter',function(){hold=true;});el.addEventListener('mouseleave',function(){hold=false;});el.addEventListener('focusin',function(){hold=true;});el.addEventListener('focusout',function(){hold=false;});
   el.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;hold=true;},{passive:true});
   el.addEventListener('touchend',function(e){if(x0!==null){var d=e.changedTouches[0].clientX-x0;if(Math.abs(d)>40)go(d<0?1:-1);}x0=null;hold=false;});}
-function ads(){var ok=ADS.filter(function(a){return !a.product_id||pr(a.product_id);}).sort(adSort),sig=JSON.stringify([ok,P.map(function(p){return [p.id,p.name,p.price,p.stock];})]);
+function ads(){var ok=ADS.filter(function(a){return a.product_id?pr(a.product_id):(a.title||a.image);}).sort(adSort),sig=JSON.stringify([ok,P.map(function(p){return [p.id,p.name,p.price,p.stock];})]);
   if(sig===adSig)return;adSig=sig;SLS.forEach(function(f){f();});SLS=[];
   var bg=ok.filter(function(a){return a.slot==='big';}).slice(0,10),sm=ok.filter(function(a){return a.slot==='small';}).slice(0,10),w=$('adsWrap');
   if(!bg.length&&!sm.length){w.hidden=true;return;}w.hidden=false;var box=$('ads');box.className='wrap ads'+(bg.length&&sm.length?'':' one');
