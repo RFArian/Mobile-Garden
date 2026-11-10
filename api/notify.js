@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
 
   if (tbl === 'orders') {
     const ref = String(r.id || '').slice(0, 8).toUpperCase();
-    const rows = [['Phone', r.product_name], ['Price', money(r.price)], ['Customer', r.name], ['Phone number', r.phone], ['Email', r.email], ['Note', r.note], ['Reference', ref]];
+    const rows = [['Items', r.product_name], ['Price', money(r.price)], ['Customer', r.name], ['Phone number', r.phone], ['Email', r.email], ['Note', r.note], ['Reference', ref]];
     if (owners().length) {
       ok = (await send({ to: owners(), subject: 'New order: ' + r.product_name + ' (' + r.name + ')',
         html: wrap('<h2 style="margin:0 0 12px">New order</h2>' + table(rows) + dash() + '<p style="color:#666;font-size:13px">Reply to this email to write to the customer.</p>'),
