@@ -130,11 +130,31 @@ html[lang=bn]{--head:'Noto Sans Bengali','Sora',sans-serif;--body:'Noto Sans Ben
 .skc{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}.skc i{display:block;background:linear-gradient(90deg,#EEF0F4 25%,#F7F8FA 50%,#EEF0F4 75%);background-size:200% 100%;animation:shm 1.3s infinite}.skc .a{aspect-ratio:1}.skc .b{height:14px;margin:1rem 1rem .5rem;border-radius:4px}.skc .c{height:14px;width:50%;margin:0 1rem 1rem;border-radius:4px}
 @keyframes shm{to{background-position:-200% 0}}
 @media(max-width:700px){body.nomb{padding-bottom:0}body.nomb.hascmp{padding-bottom:84px}body.nomb .cbar{bottom:0}}
+.bar{justify-content:flex-start;gap:1rem}
+.tn{display:flex;gap:.2rem;margin-left:1.5rem}
+.tn a{text-decoration:none;padding:.5rem .85rem;font-weight:500;border-radius:6px;color:var(--ink)}
+.tn a:hover,.tn a.on{background:var(--bg)}
+.hr{margin-left:auto;display:flex;align-items:center;gap:.5rem;position:relative}
+.hr .lang{margin:0;height:40px}
+#bg{display:inline-flex;align-items:center;gap:.55rem;width:auto;height:40px;padding:0 .9rem;font:600 .9rem var(--body);color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:99px;cursor:pointer}
+#bg:hover{background:var(--bg)}
+#bg .bi{width:16px;height:10px;position:relative;display:inline-block;border-top:2px solid currentColor;border-bottom:2px solid currentColor}
+#bg .bi::after{content:'';position:absolute;left:0;right:0;top:50%;border-top:2px solid currentColor;transform:translateY(-50%)}
+.mn{background:var(--accent);color:var(--ink);border-radius:99px;min-width:20px;height:20px;display:inline-grid;place-items:center;font:800 .72rem var(--head);padding:0 .35rem}.mn:empty{display:none}
+#nv{position:absolute;left:auto;right:0;top:calc(100% + 12px);width:min(290px,calc(100vw - 2.5rem));display:none;flex-direction:column;align-items:stretch;gap:.1rem;padding:.5rem;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 44px rgba(14,17,22,.16);z-index:40}
+#nv.open{display:flex}
+#nv a{padding:.6rem .8rem;border-radius:8px;margin:0}
+#nv a.cta{margin:.4rem 0 0;text-align:center;background:var(--accent);color:var(--ink);font-weight:700}
+#nv a.cta:hover{background:var(--accent-d)}
+#nv .sep{height:1px;background:var(--line);margin:.35rem .4rem}
+#nv .dup{display:none}
+@media(max-width:700px){.tn{display:none}#nv .dup{display:block}}
 </style></head><body>
 <a class="skip" href="#" id="skp">Skip to main content</a>
 <div class="offb" id="offb" role="status" hidden>You are offline. Some things may not work until you reconnect.</div>
-<header><div class="wrap bar"><a class="brand" href="#home" data-s="name">Nova<span> Mobile</span></a><button class="burger" id="bg" aria-label="Menu" aria-expanded="false" aria-controls="nv">&#9776;</button>
-<nav id="nv"><a href="#home">Home</a><a href="#phones">Phones</a><a href="#accessories">Accessories</a><a href="#repairs">Repairs</a><a href="#track">Track repair</a><a href="#sell">Sell your phone</a><a href="#about">About</a><a href="#contact">Contact</a><a href="#account">Account</a><a href="#cart" id="cartLink">Cart<span id="cartN"></span></a><a class="cta" href="#book">Book a repair</a></nav><button class="lang" id="lg" type="button" aria-label="Language">&#2476;&#2494;&#2434;&#2482;&#2494;</button></div></header>
+<header><div class="wrap bar"><a class="brand" href="#home" data-s="name">Nova<span> Mobile</span></a><div class="tn" role="navigation" aria-label="Main"><a href="#phones">Phones</a><a href="#accessories">Accessories</a><a href="#repairs">Repairs</a></div>
+<div class="hr"><button class="lang" id="lg" type="button" aria-label="Language">&#2476;&#2494;&#2434;&#2482;&#2494;</button><button class="burger" id="bg" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nv"><span class="bi" aria-hidden="true"></span><span>Menu</span><span class="mn" id="menuN"></span></button>
+<nav id="nv" aria-label="All pages"><a href="#home">Home</a><a class="dup" href="#phones">Phones</a><a class="dup" href="#accessories">Accessories</a><a class="dup" href="#repairs">Repairs</a><div class="sep" role="separator"></div><a href="#track">Track repair</a><a href="#sell">Sell your phone</a><a href="#about">About</a><a href="#contact">Contact</a><div class="sep" role="separator"></div><a href="#account">Account</a><a href="#cart" id="cartLink">Cart<span id="cartN"></span></a><a class="cta" href="#book">Book a repair</a></nav></div></div></header>
 <main id="main" tabindex="-1">
 <section class="page" id="pg-home">
 <div class="hero"><div class="wrap hgrid"><div><p class="eyebrow">Phones, accessories and repairs</p><h1>The right phone. <span style="color:var(--accent)">Fixed fast.</span></h1><p class="sub">Browse phones in stock, reserve one online and pay in the shop. Or bring in a broken screen and get a clear price before we start.</p><div class="actions"><a class="btn" href="#phones">Browse phones</a><a class="btn ghost" href="#book">Book a repair</a></div></div><div><div class="mock" data-s="name">Nova Mobile</div></div></div></div>
@@ -308,7 +328,7 @@ async function fbPage(tok){var d=$('fbp'),rate=0;d.innerHTML='<p class="muted">L
     if(trap($('fbF'))){fake($('fbF'),$('fbO'));return;}var bt2=$('fbF').querySelector('button[type=submit]');bt2.disabled=true;try{if(LIVE){var z=await sb.rpc('submit_feedback',{p_token:tok,p_rating:rate,p_comment:$('fbc').value.trim()});if(z.error)throw z.error;if(z.data!==true){er.textContent='We already have feedback for this link.';bt2.disabled=false;return;}}
       $('fbF').hidden=true;var o=$('fbO');o.hidden=false;o.innerHTML='<b>Thank you!</b> Your feedback has been sent.';}catch(x2){bt2.disabled=false;er.textContent='Could not send your feedback right now. Please try again later.';}};}
 var SALES={},CART=[],amode='in';try{CART=JSON.parse(localStorage.getItem('nova_cart')||'[]');}catch(x){CART=[];}
-function cartSave(){try{localStorage.setItem('nova_cart',JSON.stringify(CART));}catch(x){}var n=CART.reduce(function(a,l){return a+l.qty;},0);$('cartN').textContent=n?' ('+n+')':'';}
+function cartSave(){try{localStorage.setItem('nova_cart',JSON.stringify(CART));}catch(x){}var n=CART.reduce(function(a,l){return a+l.qty;},0);$('cartN').textContent=n?' ('+n+')':'';var mn=$('menuN');if(mn)mn.textContent=n?String(n):'';}
 function stockOf(p,c){var k=c?cols(p).filter(function(x){return x.name===c;})[0]:null;return k?k.stock:p.stock;}
 function itemsText(o){return Array.isArray(o.items)&&o.items.length?o.items.map(function(i){return i.qty+' \u00d7 '+i.name+(i.color?' ('+i.color+')':'');}).join(', '):(o.product_name||'');}
 function homeLists(){var nw=P.filter(function(p){return p.new_arrival;}),bs=P.filter(function(p){return p.best_seller;});
@@ -477,9 +497,9 @@ function trackPage(ref){$('trE').textContent='';$('trR').innerHTML='';if(ref){$(
 /* ---------- router ---------- */
 var pages=['home','phones','phone','repairs','book','contact','admin','feedback','account','cart','accessories','compare','sell','track','about'];
 function route(){var h=location.hash.replace('#','').split('/'),n=pages.indexOf(h[0])<0?'home':h[0];CUR=n;PT=TT[n]||'';setTitle();document.body.classList.toggle('isadm',n==='admin');pages.forEach(function(p){$('pg-'+p).hidden=p!==n;});
-  document.querySelectorAll('nav a').forEach(function(a){var on=a.getAttribute('href')==='#'+(n==='phone'||n==='compare'?'phones':n);a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  document.querySelectorAll('.tn a,#nv a').forEach(function(a){var on=a.getAttribute('href')==='#'+(n==='phone'||n==='compare'?'phones':n);a.classList.toggle('on',on);if(on)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   if(n==='phone')phone(h[1]);if(n==='feedback')fbPage(h[1]);if(n==='account')acct();if(n==='cart')cartPage();if(n==='admin')resume();if(n==='compare')comparePage();if(n==='track')trackPage(h[1]);if(n==='about')aboutPage();cmpUI();window.scrollTo(0,0);io();$('nv').classList.remove('open');$('bg').setAttribute('aria-expanded','false');focusHead(n);}
-window.addEventListener('hashchange',route);$('bg').onclick=function(){var o=$('nv').classList.toggle('open');$('bg').setAttribute('aria-expanded',o?'true':'false');};$('skp').onclick=function(e){e.preventDefault();$('main').focus();};document.addEventListener('keydown',function(e){if(e.key==='Escape'&&$('nv').classList.contains('open')){$('nv').classList.remove('open');$('bg').setAttribute('aria-expanded','false');$('bg').focus();}});
+window.addEventListener('hashchange',route);$('bg').onclick=function(){var o=$('nv').classList.toggle('open');$('bg').setAttribute('aria-expanded',o?'true':'false');};document.addEventListener('click',function(e){var nv=$('nv');if(!nv.classList.contains('open'))return;var t=e.target;if((t.closest&&t.closest('#nv a'))||(!nv.contains(t)&&!$('bg').contains(t))){nv.classList.remove('open');$('bg').setAttribute('aria-expanded','false');}});$('skp').onclick=function(e){e.preventDefault();$('main').focus();};document.addEventListener('keydown',function(e){if(e.key==='Escape'&&$('nv').classList.contains('open')){$('nv').classList.remove('open');$('bg').setAttribute('aria-expanded','false');$('bg').focus();}});
 /* ---------- owner admin ---------- */
 var A={p:[],o:[],b:[],rs:[],ads:[],ad:null,aerr:'',fb:[],ferr:'',m:[],mer:'',adUp:[],adOld:[],tab:'ov',cust:null,prev:'ov',edit:null,re:null,imgs:[],cols:[],ch:null,berr:'',ac:[],sr:[],ab:null,ae:null,aimgs:[],acer:'',srer:''};
 async function isOwner(){var r=await sb.rpc('is_owner');return r.data===true;}
@@ -709,7 +729,7 @@ $('adBody').addEventListener('change',async function(e){var t=e.target,g=functio
     var r5=await sb.from('sell_requests').update(u).eq('id',g('data-sof'));if(r5.error)alert('Could not save the offer: '+r5.error.message);loadA();}});
 /* ---------- v4: language, deal, settings, lists, expiry ---------- */
 var LG=(function(){try{return localStorage.getItem('nova_lg')||'en';}catch(x){return 'en';}})(),ORIG=new WeakMap(),TRB=false,mt=null,dT=null,xp=false;
-var BN={'Skip to main content':'মূল অংশে যান','Home':'হোম','Phones':'ফোন','Accessories':'এক্সেসরিজ','Repairs':'রিপেয়ার','Track repair':'রিপেয়ার ট্র্যাক','Sell your phone':'ফোন বিক্রি করুন','About':'আমাদের সম্পর্কে','Contact':'যোগাযোগ','Account':'অ্যাকাউন্ট','Cart':'কার্ট','Book a repair':'রিপেয়ার বুক করুন',
+var BN={'Menu':'মেনু','Skip to main content':'মূল অংশে যান','Home':'হোম','Phones':'ফোন','Accessories':'এক্সেসরিজ','Repairs':'রিপেয়ার','Track repair':'রিপেয়ার ট্র্যাক','Sell your phone':'ফোন বিক্রি করুন','About':'আমাদের সম্পর্কে','Contact':'যোগাযোগ','Account':'অ্যাকাউন্ট','Cart':'কার্ট','Book a repair':'রিপেয়ার বুক করুন',
 'Phones, accessories and repairs':'ফোন, এক্সেসরিজ ও রিপেয়ার','The right phone. ':'সঠিক ফোনটি। ','Fixed fast.':'দ্রুত মেরামত।','Browse phones in stock, reserve one online and pay in the shop. Or bring in a broken screen and get a clear price before we start.':'স্টকে থাকা ফোন দেখুন, অনলাইনে রিজার্ভ করুন এবং দোকানে এসে টাকা দিন। অথবা ভাঙা স্ক্রিন নিয়ে আসুন, কাজ শুরুর আগেই পরিষ্কার দাম জানুন।','Browse phones':'ফোন দেখুন',
 'Deal of the day':'আজকের অফার','Ends in':'শেষ হতে বাকি','Warranty on repairs':'রিপেয়ারে ওয়ারেন্টি','We stand behind our work.':'আমাদের কাজের দায়িত্ব আমরা নিই।','Genuine parts':'আসল যন্ত্রাংশ','Quality parts, no fakes.':'মানসম্মত যন্ত্রাংশ, কোনো নকল নয়।','Tested phones':'পরীক্ষিত ফোন','Every phone is checked before sale.':'বিক্রির আগে প্রতিটি ফোন পরীক্ষা করা হয়।','Clear prices':'পরিষ্কার দাম','Price confirmed before we start.':'কাজ শুরুর আগেই দাম নিশ্চিত।',
 'Featured phones':'বাছাই করা ফোন','See all phones':'সব ফোন দেখুন','New arrivals':'নতুন এসেছে','Best selling':'সবচেয়ে বেশি বিক্রি','Repairs with clear prices':'পরিষ্কার দামে রিপেয়ার','How repairs work':'রিপেয়ার যেভাবে হয়','Book':'বুক করুন','Pick a repair and a day.':'রিপেয়ার ও দিন বেছে নিন।','We confirm the price':'আমরা দাম নিশ্চিত করি','No surprises on the bill.':'বিলে কোনো চমক নেই।','We repair it':'আমরা মেরামত করি','Most fixes are done the same day.':'বেশিরভাগ কাজ একই দিনে শেষ হয়।','Collect your phone':'ফোন বুঝে নিন','Test it with us, then pay.':'আমাদের সামনে পরীক্ষা করে টাকা দিন।',
